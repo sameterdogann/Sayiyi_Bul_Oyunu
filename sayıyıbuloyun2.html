@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sayı Tahmini Oyunu</title>
+    <link rel="shortcut icon" href="https://i.hizliresim.com/92o2klx.png">  
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        #game-container {
+            text-align: center;
+        }
+        #message {
+            margin-bottom: 20px;
+        }
+        #input-container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="game-container">
+    <div id="message"></div>
+    <div id="input-container">
+        <input type="text" id="guess" placeholder="1 ile 50 arasında bir sayı giriniz">
+        <button onclick="makeGuess()">Tahmin Et</button>
+    </div>
+    <button id="play-again" onclick="oyunuBaslat()" style="display: none;">Yeniden Oyna</button>
+</div>
+
+<script>
+    var sayac, rasgele;
+
+    function oyunuBaslat() {
+        document.getElementById('message').innerText = "Sayı Tahmini Oyununa Hoş Geldiniz! Bir sayı tuttuk ve sen de bu sayıyı tahmin etmeye çalışacaksın. Toplamda 10 hakkın var. Başarılar!";
+        sayac = 1;
+        rasgele = Math.floor(Math.random() * 50) + 1;
+        document.getElementById('input-container').style.display = 'block';
+        document.getElementById('play-again').style.display = 'none';
+    }
+
+    function makeGuess() {
+        var tahmin = document.getElementById('guess').value;
+        if (!tahmin) return;
+        tahmin = parseInt(tahmin);
+        
+        if (isNaN(tahmin) || tahmin < 1 || tahmin > 50) {
+            document.getElementById('message').innerText = "Lütfen 1 ile 50 arasında geçerli bir sayı giriniz.";
+            return;
+        }
+
+        if (tahmin != rasgele && sayac < 10) {
+            sayac++;
+            if (tahmin > rasgele)
+                document.getElementById('message').innerText = "Lütfen daha küçük bir sayı atınız";
+            else if (tahmin < rasgele)
+                document.getElementById('message').innerText = "Lütfen daha büyük bir sayı atınız";
+
+        } else if (tahmin == rasgele) {
+            document.getElementById('message').innerText = "Tebrikler! " + sayac + ". denemede buldunuz";
+            document.getElementById('input-container').style.display = 'none';
+            document.getElementById('play-again').style.display = 'block';
+        } else {
+            document.getElementById('message').innerText = "Bilemediniz :( Doğru cevap " + rasgele + " olacaktı";
+            document.getElementById('input-container').style.display = 'none';
+            document.getElementById('play-again').style.display = 'block';
+        }
+        document.getElementById('guess').value = '';
+    }
+
+    oyunuBaslat();
+</script>
+
+</body>
+</html>
