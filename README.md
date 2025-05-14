@@ -42,7 +42,7 @@ Oyuncunun 1 ile 50 arasında rastgele seçilen bir sayıyı 10 denemede bulmaya 
 - CSS3
 - JavaScript
 
-## How to Run / Çalıştırma
+## How to Run / Nasıl Çalışır
 
 Simply open the `index.html` file in any modern web browser.  
 Herhangi bir modern web tarayıcısında `index.html` dosyasını açın.
